@@ -1,27 +1,22 @@
 function [epsilon_trials] = FOM_Bayesian_ntrials(pure_state_two_mode,povm_choice,prior_width,prior_mean,mu_max,select_odd_shift,num_steps,tau_mc,dim_theta)
-% MODIFIED from Jesús Rubio's code by Paul Knott. Details below. Removed 'shuffle', tic & toc, and non-error displays. Changed input from "state choice" to a two-mode
+% MODIFIED from JesÃºs Rubio's code by Paul Knott. Details below. Removed 'shuffle', tic & toc, and non-error displays. Changed input from "state choice" to a two-mode
 % pure state: pure_state_two_mode. Added settings select_odd_shift, dim_theta.
 
-% Jesús Rubio Jiménez, PhD student
+% ADDED by JesÃºs Rubio (Jan 2021): further details can be found in:
+%   [1] Rubio, J., Knott, P., and Dunningham, J. (2018). Non-asymptotic analysis of quantum metrology protocols beyond the CramÃ©r-Rao bound. Journal of Physics Communications, 2(1):015027
+%   [2] Rubio JimÃ©nez, J. (2020). Non-asymptotic quantum metrology: extracting maximum information from limited data. PhD thesis, University of Sussex, ISNI: 0000 0004 8504 6357 (arXiv:1912.02324).
+
+% JesÃºs Rubio JimÃ©nez, PhD student
 % University of Sussex
 % 17th February 2018
 % J.Rubio-Jimenez@sussex.ac.uk
 % 
 % mz_mse_trials(state_choice,povm_choice,prior_width,prior_mean,mu_max),
 %
-% where 'state_choice' is the label of the initial state of a Mach-Zehnder 
-% interferometer, 'povm_choice' selects the measurement scheme, 'phase_width'
-% is the width of a flat prior probability, 'phase_mean' is the middle point 
-% of its domain and 'mu_max' is the maximum number of observations/trials/
-% repetitions.
+% where 'state_choice' is the label of the initial state of a Mach-Zehnder interferometer, 'povm_choice' selects the measurement scheme, 'phase_width'is the width of a
+% flat prior probability, 'phase_mean' is the middle point of its domain, and 'mu_max' is the maximum number of observations/trials/repetitions.
 %
-% This programme calculates the mean square error as a function of the number
-% of observations/trials/repetitions.
-
-% ADDED by Jesús Rubio on Jan 2021: further the details about the theory
-% and algorithm behind this calculation can be found in
-%   * Rubio, J., Knott, P., and Dunningham, J. (2018). Non-asymptotic analysis of quantum metrology protocols beyond the Cramér-Rao bound. Journal of Physics Communications, 2(1):015027
-%   * Rubio Jiménez, J. (2020). Non-asymptotic quantum metrology: extracting maximum information from limited data. PhD thesis, University of Sussex, ISNI: 0000 0004 8504 6357 (arXiv:1912.02324).
+% This programme calculates the mean square error as a function of the number of observations/trials/repetitions.
 % tic
 
 % Seed for the random generator
